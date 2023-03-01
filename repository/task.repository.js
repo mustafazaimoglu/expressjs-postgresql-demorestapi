@@ -5,7 +5,6 @@ const Tasks = db.tasks;
 exports.getTasks = async () => {
     try {
         const tasks = await Tasks.findAll();
-        // console.log('tasks -> ', tasks);
         return tasks;
     } catch (err) {
         console.log(err);
@@ -21,7 +20,7 @@ exports.addTask = async (task) => {
         console.log(err);
         return { success: false, message: "Error while adding new task" };
     }
-    return data;
+    return { success: true, message: data };
 };
 
 exports.updateTask = async (task) => {
@@ -39,7 +38,12 @@ exports.updateTask = async (task) => {
         console.log(err);
         return { success: false, message: "Error while updating the task" };
     }
-    return data;
+    
+    if (data > 0) {
+        return { success: true, message: `the task updated!`, data:task };
+    } else {
+        return { success: false, message: "Error while updating the task!" };
+    }
 };
 
 exports.deleteTask = async (taskId) => {
@@ -52,7 +56,11 @@ exports.deleteTask = async (taskId) => {
         });
     } catch (err) {
         console.log(err);
-        return { success: false, message: "Error while deleting the task" };
+        return { success: false, message: "Error while deleting the task!" };
     }
-    return data;
+    if (data > 0) {
+        return { success: true, message: `ID : ${taskId} deleted!` };
+    } else {
+        return { success: false, message: "Error while deleting the task!" };
+    }
 };

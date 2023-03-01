@@ -4,8 +4,8 @@ const Tasks = db.tasks;
 
 exports.getTasks = async () => {
     try {
-        const tasks = await Tasks.findAll();
-        return tasks;
+        const data = await Tasks.findAll();
+        return { success: true, data: data };
     } catch (err) {
         console.log(err);
         return [];
@@ -20,7 +20,7 @@ exports.addTask = async (task) => {
         console.log(err);
         return { success: false, message: "Error while adding new task" };
     }
-    return { success: true, message: data };
+    return { success: true, data: data };
 };
 
 exports.updateTask = async (task) => {

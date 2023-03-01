@@ -9,7 +9,7 @@ const dialect = process.env.DIALECT;
 
 const sequelize = new Sequelize(
     `postgres://${userName}:${password}@${host}:${databasePort}/${databaseName}`,
-    { dialect }
+    { dialect:dialect }
 );
 
 //checking if connection is done
@@ -19,7 +19,7 @@ sequelize
         console.log(`Database connection successfull!`);
     })
     .catch((err) => {
-        console.log("Database connection ERROR!" + err);
+        console.log("Database connection ERROR! " + err);
     });
 
 const db = {};
@@ -27,7 +27,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 //connecting to model
-db.users = require("../model/task.model")(sequelize, DataTypes);
+db.tasks = require("../model/task.model")(sequelize, DataTypes);
 
 //exporting the module
 module.exports = db;

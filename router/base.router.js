@@ -1,11 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const taskRouter = require("./task.router");
-const db = require("../config/db.config");
 
-router.get("/", (req, res) => {
-    const Tasks = db.users;
-    res.send({ message: "API works!" });
+const taskRepository = require("../repository/task.repository");
+
+router.get("/", async (req, res) => {
+    task = {
+        title: "task4",
+        description: "t4",
+        is_finished: true,
+    };
+    result = await taskRepository.addTask(task);
+    console.log(result);
+    res.send(result);
+    // res.send({ message: "API works!" });
 });
 
 router.use("/tasks", taskRouter);

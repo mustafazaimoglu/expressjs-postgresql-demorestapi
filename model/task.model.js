@@ -2,8 +2,8 @@ module.exports = (sequelize, DataTypes) => {
     const Task = sequelize.define( "tasks", {
         id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey:true
+            primaryKey:true,
+            autoIncrement: true,
         },
         title: {
             type: DataTypes.STRING,
@@ -17,6 +17,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.BOOLEAN,
             allowNull: false,
         }
-    }, {timestamps: true} )
+    }, {timestamps: false} )
     return Task;
  }

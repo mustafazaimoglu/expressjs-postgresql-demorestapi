@@ -44,7 +44,12 @@ router.get("/isLoggedIn", (req, res) => {
     jwt.verify(token, process.env.TOKEN_SECRET, (err, tokenData) => {
         console.log(err);
 
-        if (err) return res.sendStatus(403);
+        if (err) {
+            return res.status(403).send({
+                success: false,
+                message: "Token error!",
+            });
+        }
 
         console.log(tokenData);
         if (tokenData.username === process.env.DEMO_USERNAME) {

@@ -1,8 +1,10 @@
 var express = require("express");
 var router = express.Router();
 const taskController = require('../controller/task.controller')
+const { authTest } = require("../middleware/auth.middleware");
 
-router.get("/", (req, res) => {
+// AUTH MIDDLEWARE SIMULATION
+router.get("/", authTest, (req, res) => {
     res.send({ message: "API still works! - TASKS" });
 });
 
